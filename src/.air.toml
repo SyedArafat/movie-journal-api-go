@@ -1,0 +1,24 @@
+# .air.toml
+
+# Set the root directory of your project
+root = "."
+
+# Directory to watch for changes
+include = [
+    "cmd/main",  # Watch the main package directory
+]
+
+# Exclude directories from watching
+exclude = [
+    ".git",
+    "tmp",
+    "vendor",
+]
+
+# Command to build your application
+[build]
+cmd = "go build -o ./tmp/main cmd/main/main.go"
+
+# Command to run your application
+[run]
+exec = "./tmp/main"

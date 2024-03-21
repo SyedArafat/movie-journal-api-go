@@ -16,9 +16,12 @@ ARG HTTP_PROXY
 ARG HTTPS_PROXY
 ARG NO_PROXY
 
+ARG HOST_OS
+
 ENV http_proxy="${HTTP_PROXY}" \
     https_proxy="${HTTPS_PROXY}" \
-    no_proxy="${NO_PROXY}"
+    no_proxy="${NO_PROXY}" \
+    HOST_OS="${HOST_OS}"
 
 ENV GO111MODULE=on \
     CGO_ENABLED="${CGO_ENABLED}" \
@@ -59,7 +62,15 @@ RUN go mod tidy
 
 RUN go build -o /goapp ./cmd/main/
 
-CMD ["air", "-c", ".air.toml"]
+COPY ./docker/app/dev.entrypoint.sh /
+
+RUN chmod a+x /dev.entrypoint.sh
+
+CMD ["sh", "/dev.entrypoint.sh"]
+
+#CMD ["air", "-c", ".air.toml"]
+#CMD ["/go/bin/linux_amd64/air", "-c", ".air.toml"]
+
 
 FROM alpine:latest as prod
 
