@@ -6,7 +6,7 @@ import (
 	"github.com/rs/zerolog/pkgerrors"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"io"
-	"movie-journal-api/config/appConfig"
+	"movie-journal-api/config"
 	"os"
 	"strconv"
 	"sync"
@@ -30,7 +30,7 @@ func Initialize() {
 			Out:        os.Stdout,
 			TimeFormat: time.RFC3339,
 		}
-		currentDate := time.Now().Format(appConfig.DateFormat)
+		currentDate := time.Now().Format(config.DateFormat)
 		logFileName := fmt.Sprintf("storage/logs/%s.log", currentDate)
 
 		if os.Getenv("APP_ENV") != "development" {
