@@ -5,6 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"movie-journal-api/internal/logger"
 	"movie-journal-api/internal/utils"
+	"runtime/debug"
 )
 
 func GlobalFiberErrorHandler(ctx *fiber.Ctx, err error) error {
@@ -25,6 +26,7 @@ func GlobalFiberErrorHandler(ctx *fiber.Ctx, err error) error {
 		errorMessage = "Internal Server Errors"
 		errorDetails = map[string]interface{}{
 			"reason": err.Error(),
+			"trace":  string(debug.Stack()),
 		}
 	}
 	logger.PrintError("global_error", err.Error(), err)

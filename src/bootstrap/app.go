@@ -2,8 +2,9 @@ package bootstrap
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"movie-journal-api/config"
+	"movie-journal-api/config/fiberConfig"
 	"movie-journal-api/internal/driver/database"
+	"movie-journal-api/internal/logger"
 )
 
 var App Application
@@ -14,7 +15,8 @@ type Application struct {
 }
 
 func Initialize() Application {
-	application := fiber.New(config.FiberConfig())
+	logger.Initialize()
+	application := fiber.New(fiberConfig.Get())
 	return initializeApplication(application)
 }
 

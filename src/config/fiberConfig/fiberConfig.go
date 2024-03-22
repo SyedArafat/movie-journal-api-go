@@ -1,4 +1,4 @@
-package config
+package fiberConfig
 
 import (
 	"github.com/gofiber/fiber/v2"
@@ -11,7 +11,7 @@ import (
 
 var Port = os.Getenv("APP_SERVER_PORT")
 
-func FiberConfig() fiber.Config {
+func Get() fiber.Config {
 	readTimeoutSecondsCount, _ := strconv.Atoi(os.Getenv("SERVER_READ_TIMEOUT"))
 	appName := os.Getenv("APP_NAME")
 	return fiber.Config{

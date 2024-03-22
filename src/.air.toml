@@ -2,6 +2,7 @@
 
 # Set the root directory of your project
 root = "."
+tmp_dir = "storage/tmp"
 
 # Directory to watch for changes
 include = [
@@ -11,14 +12,15 @@ include = [
 # Exclude directories from watching
 exclude = [
     ".git",
-    "tmp",
     "vendor",
+    "storage"
 ]
 
 # Command to build your application
 [build]
-cmd = "go build -o ./tmp/main cmd/main/main.go"
+cmd = "go build -o ./storage/tmp/main cmd/main/main.go"
 
+bin = "./storage/tmp/main"
 # Command to run your application
-[run]
-exec = "./tmp/main"
+# [run]
+# exec = "./storage/tmp/main"
