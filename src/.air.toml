@@ -21,6 +21,3 @@ exclude = [
 cmd = "go build -o ./storage/tmp/main cmd/main/main.go"
 
 bin = "./storage/tmp/main"
-# Command to run your application
-# [run]
-# exec = "./storage/tmp/main"

@@ -68,10 +68,6 @@ RUN chmod a+x /dev.entrypoint.sh
 
 CMD ["sh", "/dev.entrypoint.sh"]
 
-#CMD ["air", "-c", ".air.toml"]
-#CMD ["/go/bin/linux_amd64/air", "-c", ".air.toml"]
-
-
 FROM alpine:latest as prod
 
 ARG TIMEZONE="Asia/Dhaka"
