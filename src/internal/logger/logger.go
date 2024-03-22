@@ -14,3 +14,6 @@ func init() {
 func PrintInfo(channel string, message string) {
 	Write.Info().Str("Channel", channel).Msg(message)
 }
+func PrintError(channel string, message string, error error) {
+	Write.Error().Str("Channel", channel).Err(error).Msg(message)
+}

@@ -2,9 +2,9 @@ package dto
 
 type SuccessResponseDto struct {
 	Status     string `json:"status"`
-	StatusCode int    `json:"status_code"`
+	StatusCode int    `json:"code"`
 	Data       any    `json:"data"`
-	Meta       any    `json:"meta"`
+	//Meta       any    `json:"meta"`
 }
 
 type ErrorResponseDto struct {

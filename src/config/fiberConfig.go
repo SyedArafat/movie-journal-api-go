@@ -20,7 +20,7 @@ func FiberConfig() fiber.Config {
 		StrictRouting:  true,
 		ReadTimeout:    time.Second * time.Duration(readTimeoutSecondsCount),
 		ReadBufferSize: 5192,
-		ErrorHandler:   errorhandler.CustomFiberErrorHandler,
+		ErrorHandler:   errorhandler.GlobalFiberErrorHandler,
 	}
 }
 

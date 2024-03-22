@@ -20,7 +20,6 @@ func (aS *ApplicationService) BaseEndPoint(c *fiber.Ctx) error {
 	return utils.SuccessResponse(
 		c,
 		fiber.StatusOK,
-		"MyGP ABTest MS",
-		nil,
+		"Movie Journal API",
 	)
 }

@@ -5,12 +5,11 @@ import (
 	"movie-journal-api/internal/dto"
 )
 
-func SuccessResponse(ctx *fiber.Ctx, code int, data any, meta any) error {
+func SuccessResponse(ctx *fiber.Ctx, code int, data any) error {
 	return ctx.Status(code).JSON(dto.SuccessResponseDto{
 		Status:     "Success",
 		StatusCode: code,
 		Data:       data,
-		Meta:       meta,
 	})
 }
 

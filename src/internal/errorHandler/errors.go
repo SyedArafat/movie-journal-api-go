@@ -3,17 +3,11 @@ package errorhandler
 import (
 	"errors"
 	"github.com/gofiber/fiber/v2"
+	"movie-journal-api/internal/logger"
 	"movie-journal-api/internal/utils"
 )
 
-func CustomFiberErrorHandler(ctx *fiber.Ctx, err error) error {
-	//var errDetails string
-
-	//er = err
-	//errDetails = "Stack Trace:" + string(debug.Stack())
-	//log.Println(err)
-	//os.Exit(1)
-
+func GlobalFiberErrorHandler(ctx *fiber.Ctx, err error) error {
 	// Status code defaults to 500
 	var statusCode int
 	var errorMessage string
@@ -33,6 +27,7 @@ func CustomFiberErrorHandler(ctx *fiber.Ctx, err error) error {
 			"reason": err.Error(),
 		}
 	}
+	logger.PrintError("global_error", err.Error(), err)
 
 	return utils.ErrorResponse(ctx, statusCode, errorMessage, errorDetails)
 }

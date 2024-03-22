@@ -19,6 +19,6 @@ func NewApplicationHandler(app bootstrap.Application) *ApplicationHandler {
 
 func (ah *ApplicationHandler) Base(c *fiber.Ctx) error {
 	as := services.NewApplicationService(ah.Application)
-	logger.PrintInfo("test-database", "Testing database. Inside repo")
+	logger.PrintInfo("movie-journal-api", "Movie journal API")
 	return as.BaseEndPoint(c)
 }
