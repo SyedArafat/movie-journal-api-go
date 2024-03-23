@@ -26,6 +26,6 @@ func Get() fiber.Config {
 
 func RecoveryConfig() recover.Config {
 	return recover.Config{
-		EnableStackTrace: true,
+		EnableStackTrace: false,
 	}
 }
