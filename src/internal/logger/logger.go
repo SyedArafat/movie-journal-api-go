@@ -55,6 +55,14 @@ func Initialize() {
 func PrintInfo(channel string, message string) {
 	logger.Info().Str("Channel", channel).Msg(message)
 }
-func PrintError(channel string, message string, error error) {
-	logger.Error().Str("Channel", channel).Err(error).Msg(message)
+func PrintError(channel string, message string, trace string, err error) {
+	log := logger.Error().Str("Channel", channel)
+	if trace != "" {
+		log = log.Str("Trace", trace)
+	}
+	if err != nil {
+		log = log.Err(err)
+	}
+
+	log.Msg(message)
 }

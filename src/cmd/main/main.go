@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"log"
 	"movie-journal-api/bootstrap"
 	"movie-journal-api/config/fiberConfig"
@@ -33,7 +34,7 @@ func main() {
 	//	}()
 	//	return c.Next()
 	//})
-	//app.App.Use(recover.New(fiberConfig.RecoveryConfig()))
+	app.App.Use(recover.New(fiberConfig.RecoveryConfig()))
 	//app.App.Use(logger.New(logger.Config{
 	//	Format: "${status} - ${method} ${path}\n",
 	//}))
