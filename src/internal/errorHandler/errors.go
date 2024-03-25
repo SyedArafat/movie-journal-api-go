@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log"
+	"movie-journal-api/config"
 	"movie-journal-api/internal/logger"
 	"movie-journal-api/internal/utils"
 	"runtime/debug"
 )
 
-func GlobalFiberErrorHandler(ctx *fiber.Ctx, err error) error {
-	// Status code defaults to 500
+func FiberErrorHandler(ctx *fiber.Ctx, err error) error {
 	var statusCode int
 	var errorMessage string
 	var errorDetails interface{}
@@ -25,16 +25,13 @@ func GlobalFiberErrorHandler(ctx *fiber.Ctx, err error) error {
 		errorDetails = e // Fiber error details
 	default:
 		statusCode = fiber.StatusInternalServerError
-		errorMessage = "Something went wrong"
+		errorMessage = config.ServerErrorMessage
 		errorDetails = map[string]interface{}{
 			"reason": err.Error(),
 			//"trace":  string(debug.Stack()),
 		}
 	}
-	log.Println("----------- logg ------------")
-	//_, file, line, _ := runtime.Caller(1)
-	//log.Println(file, line)
-
+	log.Println("----------- Error log ------------")
 	logger.PrintError("global_error", err.Error(), "", err)
 
 	return utils.ErrorResponse(ctx, statusCode, errorMessage, errorDetails)
@@ -45,12 +42,12 @@ func GlobalErrorHandler(c *fiber.Ctx) error {
 		if r := recover(); r != nil {
 			reason := fmt.Sprintf("%v\n", r)
 			statusCode := fiber.StatusInternalServerError
-			errorMessage := "Internal Server Errors"
+			errorMessage := config.ServerErrorMessage
 			errorDetails := map[string]interface{}{
 				"reason": reason,
 				"trace":  string(debug.Stack()),
 			}
-			logger.PrintError("global_error", reason, string(debug.Stack()), nil)
+			logger.PrintError("panic", reason, string(debug.Stack()), nil)
 			err := utils.ErrorResponse(c, statusCode, errorMessage, errorDetails)
 			if err != nil {
 				return
@@ -59,5 +56,4 @@ func GlobalErrorHandler(c *fiber.Ctx) error {
 		}
 	}()
 	return c.Next()
-
 }
