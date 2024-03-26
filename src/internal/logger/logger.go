@@ -26,14 +26,11 @@ func Initialize() {
 			logLevel = int(zerolog.InfoLevel) // default to INFO
 		}
 
-		var output io.Writer = zerolog.ConsoleWriter{
-			Out:        os.Stdout,
-			TimeFormat: time.RFC3339,
-		}
+		var output io.Writer = zerolog.MultiLevelWriter(os.Stderr)
 		currentDate := time.Now().Format(config.DateFormat)
 		logFileName := fmt.Sprintf("storage/logs/%s.log", currentDate)
 
-		if os.Getenv("APP_ENV") != "development" {
+		if config.FileLog == "true" {
 			fileLogger := &lumberjack.Logger{
 				Filename:   logFileName,
 				MaxSize:    5, //
