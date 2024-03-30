@@ -32,7 +32,7 @@ func FiberErrorHandler(ctx *fiber.Ctx, err error) error {
 		}
 	}
 	log.Println("----------- Error log ------------")
-	logger.PrintError("global_error", err.Error(), "", err)
+	logger.Error("global_error", err.Error(), "", err)
 
 	return utils.ErrorResponse(ctx, statusCode, errorMessage, errorDetails)
 }
@@ -47,7 +47,7 @@ func GlobalErrorHandler(c *fiber.Ctx) error {
 				"reason": reason,
 				"trace":  string(debug.Stack()),
 			}
-			logger.PrintError("panic", reason, string(debug.Stack()), nil)
+			logger.Error("panic", reason, string(debug.Stack()), nil)
 			err := utils.ErrorResponse(c, statusCode, errorMessage, errorDetails)
 			if err != nil {
 				return

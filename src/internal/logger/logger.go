@@ -49,10 +49,21 @@ func Initialize() {
 			Logger()
 	})
 }
-func PrintInfo(channel string, message string) {
+func Info(channel string, message string) {
 	logger.Info().Str("Channel", channel).Msg(message)
 }
-func PrintError(channel string, message string, trace string, err error) {
+
+func Debug(message string, channel string) {
+	log := logger.Debug()
+
+	if channel != "" {
+		log = log.Str("Channel", channel)
+	}
+
+	log.Msg(message)
+}
+
+func Error(channel string, message string, trace string, err error) {
 	log := logger.Error().Str("Channel", channel)
 	if trace != "" {
 		log = log.Str("Trace", trace)

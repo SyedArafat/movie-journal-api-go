@@ -14,7 +14,7 @@ func main() {
 
 	app.App.Use(errorhandler.GlobalErrorHandler)
 	routes.InitRoutes(app)
-	logger.PrintInfo("main", "AB Test MS successfully initiated")
+	logger.Info("main", "AB Test MS successfully initiated")
 
 	log.Println(app.App.Listen(":" + fiberConfig.Port))
 }

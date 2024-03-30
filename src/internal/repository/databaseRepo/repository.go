@@ -1,15 +1,17 @@
 package databaseRepo
 
 import (
-	"gorm.io/gorm"
 	"movie-journal-api/bootstrap"
+	"movie-journal-api/internal/driver/database"
+	"movie-journal-api/internal/logger"
 )
 
-var db *gorm.DB
+var db *database.DB
 
-func (app *ApplicationRepo) getDB() *gorm.DB {
+func (app *ApplicationRepo) getDB() *database.DB {
 	if db == nil {
-		db = app.InitializeDatabase().SQL
+		logger.Info("db is nil", "")
+		db = app.InitializeDatabase()
 	}
 
 	return db
