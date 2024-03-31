@@ -1,6 +1,7 @@
 package bootstrap
 
 import (
+	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"movie-journal-api/config/fiberConfig"
 	"movie-journal-api/internal/driver/database"
@@ -10,19 +11,22 @@ import (
 var App Application
 
 type Application struct {
-	App *fiber.App
-	db  *database.DB
+	App       *fiber.App
+	db        *database.DB
+	Validator *validator.Validate
 }
 
 func Initialize() Application {
 	logger.Initialize()
 	application := fiber.New(fiberConfig.Get())
-	return initializeApplication(application)
+	val := validator.New()
+	return initializeApplication(application, val)
 }
 
-func initializeApplication(a *fiber.App) Application {
+func initializeApplication(a *fiber.App, v *validator.Validate) Application {
 	App = Application{
-		App: a,
+		App:       a,
+		Validator: v,
 	}
 	return App
 }

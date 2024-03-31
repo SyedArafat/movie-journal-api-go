@@ -4,7 +4,7 @@ import (
 	"movie-journal-api/internal/repository/databaseRepo"
 )
 
-func (aS *ApplicationService) CheckDBConnection() error {
-	repo := databaseRepo.NewApplicationRepo(aS.Application)
+func (as *ApplicationService) CheckDBConnection() error {
+	repo := databaseRepo.NewApplicationRepo(as.Application)
 	return repo.TestDatabase()
 }

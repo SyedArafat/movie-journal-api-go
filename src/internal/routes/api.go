@@ -10,4 +10,9 @@ func InitRoutes(app bootstrap.Application) {
 
 	app.App.Get("/", applicationHandler.Base)
 	app.App.Get("/health-check", applicationHandler.HealthCheck)
+
+	api := app.App.Group("/api")
+
+	auth := api.Group("/auth")
+	auth.Post("/register", applicationHandler.Register)
 }

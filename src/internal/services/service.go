@@ -16,7 +16,7 @@ func NewApplicationService(app bootstrap.Application) *ApplicationService {
 	}
 }
 
-func (aS *ApplicationService) BaseEndPoint(c *fiber.Ctx) error {
+func (as *ApplicationService) BaseEndPoint(c *fiber.Ctx) error {
 	return utils.SuccessResponse(
 		c,
 		fiber.StatusOK,
